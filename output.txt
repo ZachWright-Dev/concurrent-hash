@@ -1,0 +1,8 @@
+Sid Meier,50000
+PRINT Current Database:
+    660427450: Carol Shaw,48000
+    909366975: Roberta Williams,70000
+    1499823524: Koji Kondo,150000
+    2569965317: Hideo Kojima,45000
+    3449751099: Sid Meier,55000
+
