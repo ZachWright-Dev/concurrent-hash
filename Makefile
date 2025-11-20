@@ -1,28 +1,21 @@
-CC      := gcc
-CFLAGS  := -Wall -Wextra -Wpedantic -std=c11
+CC := gcc
+CFLAGS := -std=c11 -Wall -Wextra -pedantic -g -pthread -Iinclude
 LDFLAGS := -pthread
-
-SRCS := chash.c \
-        commands.c \
-        hash_table.c \
-        logger.c \
-        scheduler.c
-
-OBJS := $(SRCS:.c=.o)
-
-TARGET := chash
+SRC := src/chash.c src/hash_table.c src/logger.c
+OBJ := $(SRC:src/%.c=build/%.o)
 
 .PHONY: all clean
 
-all: $(TARGET)
+all: chash
 
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+chash: $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS)
 
-%.o: %.c
+build/%.o: src/%.c | build
 	$(CC) $(CFLAGS) -c $< -o $@
 
+build:
+	mkdir -p build
+
 clean:
-	rm -f $(TARGET) $(OBJS)
-
-
+	rm -rf build chash hash.log
